@@ -52,16 +52,18 @@
       translate: 50%;
     }
 
-    &[open] {
-      display: flex;
+    @include tablet {
+      &[open] {
+        display: flex;
 
-      @starting-style {
+        @starting-style {
+          @include starting-styles;
+        }
+      }
+
+      &:not([open]) {
         @include starting-styles;
       }
-    }
-
-    &:not([open]) {
-      @include starting-styles;
     }
   }
 
