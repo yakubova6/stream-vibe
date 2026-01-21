@@ -10,12 +10,22 @@
   animation-timeline: scroll();
   animation-range: 0 100px;
 
+  @mixin scrolling-header-styles {
+    padding-block: 10px;
+    background-color: var(--color-black-08);
+    border-color: var(--color-black-15);
+  }
+
   @keyframes scrolling-header {
     to {
-      padding-block: 10px;
-      background-color: var(--color-black-08);
-      border-color: var(--color-black-15);
+      @include scrolling-header-styles;
     }
+  }
+
+  @supports(not (animation-timeline: scroll())) {
+    @include scrolling-header-styles;
+
+    position: sticky !important;
   }
 
   &.is-fixed {
