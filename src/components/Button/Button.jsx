@@ -20,7 +20,8 @@ const Button = (props) => {
          * 'before' | 'after'
          */
         iconPosition = 'before',
-        hasFillIcon
+        hasFillIcon,
+        extraAttrs,
     } = props
 
     const isLink = href !== undefined
@@ -39,18 +40,19 @@ const Button = (props) => {
 
     return (
         <Component
-        className={classNames(className, 'button', {
+          className={classNames(className, 'button', {
             [`button--${mode}`]: mode,
-        })}
-        title={title}
-        aria-label={title}
-        {...specificProps}
+          })}
+          title={title}
+          aria-label={title}
+          {...specificProps}
+          {...extraAttrs}
         >
-            {iconPosition === 'before' && iconComponent}
-            {!isLabelHidden && (
-                <span className="button__label">{label}</span>
-            )}
-            {iconPosition === 'after' && iconComponent}
+          {iconPosition === 'before' && iconComponent}
+          {!isLabelHidden && (
+              <span className="button__label">{label}</span>
+          )}
+          {iconPosition === 'after' && iconComponent}
         </Component>
     )
 }
