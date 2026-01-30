@@ -22,6 +22,7 @@ const Categories = () => {
         >
             <Slider
                 navigationTargetElementId={sliderNavigationId}
+                isBleedOnMobileS
             >
                 {categoryItems.map((categoryItem, index) => (
                     <CategoryCard
