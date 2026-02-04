@@ -1,188 +1,43 @@
-// Array of category items for sliders with images and titles
-const categoryItems = [
-    {
-        title: 'Action',
-        images: [
-            '/src/assets/images/categories/action/1.jpg',
-            '/src/assets/images/categories/action/2.jpg',
-            '/src/assets/images/categories/action/3.jpg',
-            '/src/assets/images/categories/action/4.jpg',
-        ]
-    },
-    {
-        title: 'Adventure',
-        images: [
-            '/src/assets/images/categories/adventure/1.jpg',
-            '/src/assets/images/categories/adventure/2.jpg',
-            '/src/assets/images/categories/adventure/3.jpg',
-            '/src/assets/images/categories/adventure/4.jpg',
-        ]
-    },
-    {
-        title: 'Comedy',
-        images: [
-            '/src/assets/images/categories/comedy/1.jpg',
-            '/src/assets/images/categories/comedy/2.jpg',
-            '/src/assets/images/categories/comedy/3.jpg',
-            '/src/assets/images/categories/comedy/4.jpg',
-        ]
-    },
-    {
-        title: 'Drama',
-        images: [
-            '/src/assets/images/categories/drama/1.jpg',
-            '/src/assets/images/categories/drama/2.jpg',
-            '/src/assets/images/categories/drama/3.jpg',
-            '/src/assets/images/categories/drama/4.jpg',
-        ]
-    },
-    {
-        title: 'Horror',
-        images: [
-            '/src/assets/images/categories/horror/1.jpg',
-            '/src/assets/images/categories/horror/2.jpg',
-            '/src/assets/images/categories/horror/3.jpg',
-            '/src/assets/images/categories/horror/4.jpg',
-        ]
-    },
+// Load all category images using Vite's glob import
+const imageModules = import.meta.glob('../../assets/images/categories/*/*.jpg', {
+    eager: true,
+    import: 'default',
+})
 
-    {
-        title: 'Action',
-        images: [
-            '/src/assets/images/categories/action/1.jpg',
-            '/src/assets/images/categories/action/2.jpg',
-            '/src/assets/images/categories/action/3.jpg',
-            '/src/assets/images/categories/action/4.jpg',
-        ]
-    },
-    {
-        title: 'Adventure',
-        images: [
-            '/src/assets/images/categories/adventure/1.jpg',
-            '/src/assets/images/categories/adventure/2.jpg',
-            '/src/assets/images/categories/adventure/3.jpg',
-            '/src/assets/images/categories/adventure/4.jpg',
-        ]
-    },
-    {
-        title: 'Comedy',
-        images: [
-            '/src/assets/images/categories/comedy/1.jpg',
-            '/src/assets/images/categories/comedy/2.jpg',
-            '/src/assets/images/categories/comedy/3.jpg',
-            '/src/assets/images/categories/comedy/4.jpg',
-        ]
-    },
-    {
-        title: 'Drama',
-        images: [
-            '/src/assets/images/categories/drama/1.jpg',
-            '/src/assets/images/categories/drama/2.jpg',
-            '/src/assets/images/categories/drama/3.jpg',
-            '/src/assets/images/categories/drama/4.jpg',
-        ]
-    },
-    {
-        title: 'Horror',
-        images: [
-            '/src/assets/images/categories/horror/1.jpg',
-            '/src/assets/images/categories/horror/2.jpg',
-            '/src/assets/images/categories/horror/3.jpg',
-            '/src/assets/images/categories/horror/4.jpg',
-        ]
-    },
+// Base categories array
+const categories = ['action', 'adventure', 'comedy', 'drama', 'horror']
 
-    {
-        title: 'Action',
-        images: [
-            '/src/assets/images/categories/action/1.jpg',
-            '/src/assets/images/categories/action/2.jpg',
-            '/src/assets/images/categories/action/3.jpg',
-            '/src/assets/images/categories/action/4.jpg',
-        ]
-    },
-    {
-        title: 'Adventure',
-        images: [
-            '/src/assets/images/categories/adventure/1.jpg',
-            '/src/assets/images/categories/adventure/2.jpg',
-            '/src/assets/images/categories/adventure/3.jpg',
-            '/src/assets/images/categories/adventure/4.jpg',
-        ]
-    },
-    {
-        title: 'Comedy',
-        images: [
-            '/src/assets/images/categories/comedy/1.jpg',
-            '/src/assets/images/categories/comedy/2.jpg',
-            '/src/assets/images/categories/comedy/3.jpg',
-            '/src/assets/images/categories/comedy/4.jpg',
-        ]
-    },
-    {
-        title: 'Drama',
-        images: [
-            '/src/assets/images/categories/drama/1.jpg',
-            '/src/assets/images/categories/drama/2.jpg',
-            '/src/assets/images/categories/drama/3.jpg',
-            '/src/assets/images/categories/drama/4.jpg',
-        ]
-    },
-    {
-        title: 'Horror',
-        images: [
-            '/src/assets/images/categories/horror/1.jpg',
-            '/src/assets/images/categories/horror/2.jpg',
-            '/src/assets/images/categories/horror/3.jpg',
-            '/src/assets/images/categories/horror/4.jpg',
-        ]
-    },
+// Get images for a specific category
+const getCategoryImages = (categoryName) => {
+    const images = []
 
-    {
-        title: 'Action',
-        images: [
-            '/src/assets/images/categories/action/1.jpg',
-            '/src/assets/images/categories/action/2.jpg',
-            '/src/assets/images/categories/action/3.jpg',
-            '/src/assets/images/categories/action/4.jpg',
-        ]
-    },
-    {
-        title: 'Adventure',
-        images: [
-            '/src/assets/images/categories/adventure/1.jpg',
-            '/src/assets/images/categories/adventure/2.jpg',
-            '/src/assets/images/categories/adventure/3.jpg',
-            '/src/assets/images/categories/adventure/4.jpg',
-        ]
-    },
-    {
-        title: 'Comedy',
-        images: [
-            '/src/assets/images/categories/comedy/1.jpg',
-            '/src/assets/images/categories/comedy/2.jpg',
-            '/src/assets/images/categories/comedy/3.jpg',
-            '/src/assets/images/categories/comedy/4.jpg',
-        ]
-    },
-    {
-        title: 'Drama',
-        images: [
-            '/src/assets/images/categories/drama/1.jpg',
-            '/src/assets/images/categories/drama/2.jpg',
-            '/src/assets/images/categories/drama/3.jpg',
-            '/src/assets/images/categories/drama/4.jpg',
-        ]
-    },
-    {
-        title: 'Horror',
-        images: [
-            '/src/assets/images/categories/horror/1.jpg',
-            '/src/assets/images/categories/horror/2.jpg',
-            '/src/assets/images/categories/horror/3.jpg',
-            '/src/assets/images/categories/horror/4.jpg',
-        ]
-    },
-]
+    // Get 4 images for this category
+    for (let i = 1; i <= 4; i++) {
+        const path = `../../assets/images/categories/${categoryName}/${i}.jpg`
+        if (imageModules[path]) {
+            images.push(imageModules[path])
+        }
+    }
+
+    return images
+}
+
+// Format category name (first letter uppercase)
+const formatCategoryName = (name) => {
+    return name.charAt(0).toUpperCase() + name.slice(1)
+}
+
+// Create category items array
+const categoryItems = []
+
+// Repeat 4 times (like in original code)
+for (let repetition = 0; repetition < 4; repetition++) {
+    for (const category of categories) {
+        categoryItems.push({
+            title: formatCategoryName(category),
+            images: getCategoryImages(category)
+        })
+    }
+}
 
 export default categoryItems
