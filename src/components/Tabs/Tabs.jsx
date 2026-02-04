@@ -40,6 +40,7 @@ const Tabs = (props) => {
                             id={contentId}
                             aria-labelledby={buttonId}
                             tabIndex={0}
+                            role="tabpanel"
                             data-js-tabs-content=""
                             key={index}
                         >
