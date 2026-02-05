@@ -1,5 +1,6 @@
 // Import utility to get parameters from data attributes
-import getParams from "@/utils/getParams";
+import getParams from "@/utils/getParams"
+import pxToRem from "@/modules/pxToRem";
 
 // Root selector for all tabs components
 const rootSelector = '[data-js-tabs]'
@@ -20,8 +21,8 @@ class Tabs {
 
     // CSS variables for dynamic styles
     stateCSSVariables = {
-        activeButtonWidth: '--tabsActiveButtonWidth',
-        activeButtonOffsetLeft: '--tabsActiveButtonOffsetLeft',
+        activeButtonWidth: '--tabsNavigationActiveButtonWidth',
+        activeButtonOffsetLeft: '--tabsNavigationActiveButtonOffsetLeft',
     }
 
     // Constructor - initializes tabs instance
@@ -52,6 +53,7 @@ class Tabs {
 
         // Bind event listeners
         this.bindEvents()
+        setTimeout(this.bindObservers, 500)
     }
 
     // Update UI to reflect current active tab
@@ -65,6 +67,10 @@ class Tabs {
             buttonElement.classList.toggle(this.stateClasses.isActive, isActive)
             buttonElement.ariaSelected = isActive
             buttonElement.tabIndex = isActive ? 0 : -1
+
+            if(isActive) {
+                this.updateNavigationCSSVars(buttonElement)
+            }
         })
 
         // Update content visibility
@@ -75,6 +81,24 @@ class Tabs {
             contentElement.ariaSelected = isActive
             contentElement.tabIndex = isActive ? 0 : -1
         })
+    }
+
+    // Update CSS variables for indicator positioning
+    updateNavigationCSSVars(
+        activeButtonElement = this.buttonElements[this.state.activeTabIndex]
+    ) {
+        const { width, left } = activeButtonElement.getBoundingClientRect()
+        const offsetLeft = left - this.navigationElement.getBoundingClientRect().left
+
+        this.navigationElement.style.setProperty(
+            this.stateCSSVariables.activeButtonWidth,
+            `${pxToRem(width)}rem`
+        )
+
+        this.navigationElement.style.setProperty(
+            this.stateCSSVariables.activeButtonOffsetLeft,
+            `${pxToRem(offsetLeft)}rem`
+        )
     }
 
     // Activate specific tab by index
@@ -170,6 +194,18 @@ class Tabs {
 
         // Add keyboard navigation listener
         document.addEventListener('keydown', this.onKeyDown)
+    }
+
+    // Resize event handler
+    onResize = () => {
+        this.updateNavigationCSSVars()
+    }
+
+    // Set up observers for changes
+    bindObservers = () => {
+        const resizeObserver = new ResizeObserver(this.onResize)
+
+        resizeObserver.observe(this.navigationElement)
     }
 }
 
