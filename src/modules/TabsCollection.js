@@ -1,11 +1,11 @@
-// Import utility to get parameters from data attributes
 import getParams from "@/utils/getParams"
-import pxToRem from "@/modules/pxToRem";
+import pxToRem from "@/modules/pxToRem"
+import BaseComponent from "@/modules/generic/BaseComponent"
 
 // Root selector for all tabs components
 const rootSelector = '[data-js-tabs]'
 
-class Tabs {
+class Tabs extends BaseComponent {
     // CSS selectors for elements inside tabs component
     selectors = {
         root: rootSelector,
@@ -25,33 +25,19 @@ class Tabs {
         activeButtonOffsetLeft: '--tabsNavigationActiveButtonOffsetLeft',
     }
 
-    // Constructor - initializes tabs instance
     constructor(rootElement) {
+        super()
         this.rootElement = rootElement
-
-        // Get all tab content elements
         this.contentElements = [...this.rootElement.querySelectorAll(this.selectors.content)]
-
-        // Get parameters from data attributes
         this.params = getParams(this.rootElement, this.selectors.root)
-
-        // Find navigation element (either inside root or by ID)
         this.navigationElement = this.params.navigationTargetElementId
             ? document.getElementById(this.params.navigationTargetElementId)
             : this.rootElement.querySelector(this.selectors.navigation)
-
-        // Get all tab buttons
         this.buttonElements = [...this.navigationElement.querySelectorAll(this.selectors.button)]
-
-        // Initial state - find which tab is active by default
-        this.state = {
+        this.state = this.getProxyState({
             activeTabIndex: this.buttonElements.findIndex(({ ariaSelected }) => ariaSelected)
-        }
-
-        // Maximum tab index (zero-based)
+        })
         this.limitTabsIndex = this.buttonElements.length - 1
-
-        // Bind event listeners
         this.bindEvents()
         setTimeout(this.bindObservers, 500)
     }
@@ -104,7 +90,6 @@ class Tabs {
     // Activate specific tab by index
     activateTab(newTabIndex) {
         this.state.activeTabIndex = newTabIndex
-        this.updateUI()
         this.buttonElements[newTabIndex].focus()
     }
 
@@ -136,7 +121,6 @@ class Tabs {
     // Handle button click
     onButtonClick(buttonIndex) {
         this.state.activeTabIndex = buttonIndex
-        this.updateUI()
     }
 
     // Handle keyboard navigation
